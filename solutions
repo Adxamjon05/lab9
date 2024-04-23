@@ -1,0 +1,139 @@
+void displayPattern(int n){
+    int leng=n;
+    for (int c=0; c<n; c++){
+        for (int c2=0; c2<leng;c2++){
+            cout<<"*";
+        }
+        cout<<endl;
+        leng--;
+    }
+}
+
+int getType(int n){
+    int leng=0;
+    if (n==0){
+        return 1;
+    }
+    while (n>0){
+        leng++;
+        n=int(n/10);
+    }
+    return leng;
+}
+
+void windchill(float tempo, float speed){
+    if (speed<2 or tempo<-58 or tempo>41){
+        cout<<"Wrong parameters"<<endl;
+    } else{
+        cout<<"The wind chill index is "<<35.74+0.6215*tempo-35.75*pow(speed, 0.16)+0.4275*tempo*pow(speed, 0.16)<<endl;
+    }
+}
+
+
+int countDigitOccurrences(int num, int digit){
+    int counter=0;
+    while (num>0){
+        if (num%10==digit){
+            counter++;
+        }
+        num=int(num/10);
+    }
+    return counter;
+}
+
+
+
+string digittoword(int digit){
+    switch(digit){
+        case 1:
+            return "one";
+        case 2:
+            return "two";
+        case 3:
+            return "three";
+        case 4:
+            return "four";
+        case 5:
+            return "five";
+        case 6:
+            return "six";
+        case 7:
+            return "seven";
+        case 8:
+            return "eight";
+        case 9:
+            return "nine";
+        case 0:
+            return "zero";
+    }
+}
+
+string numbertoword(int number){
+    int lens=0;
+    int numlen=number;
+    while (numlen>0){
+        lens++;
+        numlen=int(numlen/10);
+    }
+
+    int arr1[lens];
+    string arr2[lens];
+    for(int i=lens-1; i--; i>=0){
+        arr1[i]=number%10;
+        number=int(number/10);
+    }
+    for(int k=0; k++; k<lens){
+        arr2[k]= digittoword(arr1[k]);
+    }
+    string word;
+    for (int m=0; m++; m<lens){
+        word.append(arr2[m]);
+    }
+
+    return word;
+}
+
+
+
+
+int main() {
+    displayPattern(16);
+
+    
+    int num2;
+    cin>>num2;
+    if (getType(num2)%2==0){
+        cout<<"Even digit integer"<<endl;
+    } else{
+        cout<<"Odd digit number"<<endl;
+    }
+
+
+
+    cout<<"Enter the temperature in Fahrenheit between -58F and 41F: ";
+    float tempo;
+    cin>>tempo;
+    cout<<"Enter the wind speed(>=2) in miles per hour: ";
+    float speed=0;
+    cin>>speed;
+    windchill(tempo, speed);
+
+
+
+    int num4=0;
+    cin>>num4;
+
+    for (int i=0; i<10; i++){
+        cout<<"The frequency of "<<i<<"="<<countDigitOccurrences(num4, i)<<endl;
+    }
+
+
+    int num5=0;
+    cin>>num5;
+    cout<<numbertoword(num5)<<endl;
+
+
+
+    
+    return 0;
+}
